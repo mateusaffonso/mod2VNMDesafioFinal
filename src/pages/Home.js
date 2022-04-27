@@ -22,7 +22,7 @@ width: 100%;
 border: solid white;
 display:flex;
 flex-direction: column;
-/* align-items: center; */
+
 
 `
 
@@ -60,8 +60,15 @@ margin-left: 3rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding-right: 20px;
+    padding-right: 5px;
     border: #fff 2px solid;
+
+    .scoreContainer{
+        width: 15%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
 }
 
 h2 {
@@ -90,16 +97,40 @@ display: flex;
 flex-direction: column;
 justify-content: space-evenly;
 
-figure {
-    height: 55%;
 
+
+div {
+    width: 259px;
+    height: 60%;
+    position: static;
+    
     .bannerFilm {
         width:100%;
-        z-index:0;
+        
+        
     }
 
     .favoriteHeart {
+        /* border: white solid; */
+        width: fit-content;
+        height: fit-content;
+        position: relative;
+        background-color: none;
+        left: 87%;
+        bottom:100%;
+        
+        
+
+        img {
+            opacity: 1;
+            position: absolute;
+            
+            
+
+        }
+
     }
+    
 
 
     
@@ -192,14 +223,41 @@ export default class App extends React.Component {
                         <Carousel
                             wrapAround={true}
                             slidesToShow={5}
+                            autoplay={true}
+                            autoplayInterval={1800}
+                            nextButtonClassName={`
+                            color:red;
+                            `}
+                            nextButtonStyle={`
+                            color:red;
+                            `}
+                            prevButtonClassName={""}
+                            prevButtonStyle={""}
+                            prevButtonText={""}
+
+                            
+                              renderCenterLeftControls={({ previousSlide }) => (
+                                <button onClick={previousSlide}>{String("<")}</button>
+                              )}
+                              renderCenterRightControls={({ nextSlide }) => (
+                                <button onClick={nextSlide}>{String(">")}</button>
+                              )}
+
+                
                         >
                             {this.state.movies.map((item) => (
                                 <ItemCarousel>
                                     {/* <section class="bg-solid-light slideContainer strut-slide-0" style=`background-image: url(); background-repeat: no-repeat;width: 100%;height: 100%;`></section> */}
-                                    <figure>
+                                    
+                                    <div>
+                                        {/* <div className="" ></div> */}
                                         <img className="bannerFilm" src={item.image} alt={`Banner do filme ${item.title}`}/>
-                                        <img clasName="favoriteHeart" src={favoriteHeart} alt=""/>
-                                    </figure>
+                                        {/* Criar um div no favorite e verificar a largura e altura da divs antes de dar o position */}
+                                        <div className="favoriteHeart">
+                                            <img  src={favoriteHeart} alt="icone de like"/>
+                                        </div>
+                                        
+                                    </div>
                                     <div className="middleContainer">
                                         <h3>{item.title}</h3>
                                         <div className="scoreContainer">

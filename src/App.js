@@ -21,7 +21,6 @@ import arrowDropDown from "./image/userOpition2.svg"
 
 
 
-
 const GlobalStyled = createGlobalStyle`
 * {
   margin:0;
@@ -29,6 +28,7 @@ const GlobalStyled = createGlobalStyle`
   box-sizing: border-box;
   background-color:#000000;
   color:#FFFFFF;
+  text-decoration:none;
   font-family: Arial, Helvetica, sans-serif;
 }`
 
@@ -44,7 +44,7 @@ border: white 1px solid;
 
 `
 const LeftContent = styled.div`
-width: 21%;
+width: 25.5%;
 display:flex;
 justify-content: space-between;
 align-items: center;
@@ -53,9 +53,20 @@ margin-left:3rem;
 padding:3px;
 border: white 1px solid;
 
+h1 {
+  width: 103px;
+  height: 40px;
+  color: #E71B27;
+  font-family: 'Bebas Neue', cursive;
+  font-family: 'Righteous', cursive;
+  font-family: 'Sarala', sans-serif;
+  
+}
+
 :hover {
 
 }
+
 
 nav ul {
   /* border:1px white solid; */
@@ -70,18 +81,57 @@ nav ul {
     align-items: center;
   }
 
-  .dropDownMenu {
-    position:relative;
+  .dropDownMenu{
+    border: white solid;
+    width: 6.5rem;
+    position: relative;
 
-    :hover{
+    :hover .ContainerMenu{
       display: flex;
     }
   }
+
+  .ContainerMenu{
+    position: absolute;
+    width: 6.8rem;
+    border: white solid;
+    display: none;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding: 0.75rem;
+    padding-bottom: 0;
+    margin-top: 8rem;
+    left: -0.2rem;
+    
+    li {
+      width: 100%;
+      margin-bottom: 0.4rem;
+      font-size: 14px;
+      list-style: none;
+
+      :hover {
+        
+      }
+    }
+
+    :hover {
+      display: flex;
+      
+    }
+
+  }
 }
+
+
 `
-const MenuDropDown = styled.ul`
-position:absolute;
-`
+// const MenuDropDown = styled.div`
+// position:absolute;
+
+// :hover{
+//   display: flex;
+// }
+// `
 
 const RightContent = styled.div`
 width: 45%;
@@ -117,8 +167,8 @@ button {
 }
 
 
-#HandleInput input {
-  width: 92%;
+#HandleInput .searchInput {
+  width: 100%;
   display:flex;
   align-items: center;
   background-color:#2C2C2C;
@@ -127,15 +177,27 @@ button {
   height: 30px;
   font-size: 15px;
   padding-left: 5px;
-
-  ::placeholder {
+  
+  
+  input{
+    width: 100%;
+    background-color:#2C2C2C;
+    color: #FFFFFF;
+    border-radius: 4px;
+    height: 30px;
+    font-size: 15px;
+    padding-left: 5px;
+   ::placeholder {
     color:#FFFFFF;
   }
 
   :focus{
     box-shadow: 0 0 0 0;
     outline: 0;
+  } 
   }
+
+  
   
 
   
@@ -183,7 +245,6 @@ container {
 
 export default class App extends React.Component {
   state = {
-    stateDropDown: false,
     movies: [
       {title: "Shrek", image: "link" , description: "", score:"", favorite: false },
       {title: "Hoje Eu Quero Voltar Sozinho", image: "link" , description: "", score:"", favorite: false },
@@ -208,20 +269,51 @@ export default class App extends React.Component {
         {/* <HeaderComponent/> */}
         <Header>
           <LeftContent>
-            <figure><img src={logoTodo} alt="Logo TodoFlix"/></figure>
+            {/* <figure><img src={logoTodo} alt="Logo TodoFlix"/></figure> */}
+            <h1>TODOFLIX</h1>
             <nav>
               {/* onClick={this.handleDropDown} */}
               <ul>
-                <li><Link to="/">Início</Link></li>
+                <li><Link to="/mod2VNMDesafioFinal">Início</Link></li>
                 {/* <li>Início</li> */}
-                <li className="dropDownMenu" >Categorias <img src={arrowDropDown} alt="image menu DropDown"/>
-                {this.state.stateDropDown &&  <MenuDropDown>
-                  <li><Link to="/Todos">Todos</Link></li>
+                <li className="dropDownMenu" ><a>Categorias</a> <img src={arrowDropDown} alt="image menu DropDown"/>
+
+                    <ul className="ContainerMenu">
+                      <Link to="/Todos"><li>Todos</li></Link>
+                      <li><Link to="/Favoritos">Favoritos</Link></li>
+                      <li><Link to="/JaVistos">Já vistos</Link></li>
+                      <li><Link to="/Adicionados">Adicionados</Link></li>
+                    </ul>
+                
+                
+                </li>
+                
+
+                {/* <div className="ContentDropDown">
+                  <li className="dropDownMenu" >Categorias <img src={arrowDropDown} alt="image menu DropDown"/>
+                  <MenuDropDown className="dropDownChildren">
+                  <ul>
+                    <li><Link to="/Todos">Todos</Link></li>
                   <li><Link to="/Favoritos">Favoritos</Link></li>
                   <li><Link to="/JaVistos">Já vistos</Link></li>
                   <li><Link to="/Adicionados">Adicionados</Link></li>
-                </MenuDropDown>  }
+                  </ul>
+                  
+                </MenuDropDown>
+                
                 </li>
+                </div> */}
+
+                {/* {this.state.stateDropDown &&  <MenuDropDown className="dropDownChildren">
+                  <ul>
+                    <li><Link to="/Todos">Todos</Link></li>
+                  <li><Link to="/Favoritos">Favoritos</Link></li>
+                  <li><Link to="/JaVistos">Já vistos</Link></li>
+                  <li><Link to="/Adicionados">Adicionados</Link></li>
+                  </ul>
+                  
+                </MenuDropDown>  } */}
+                
                 {/* {this.state.stateDropDown &&  <ul>
                   <li>Todos</li>
                   <li>Favoritos</li>
@@ -239,7 +331,9 @@ export default class App extends React.Component {
             <button background-color="white">Adicionar filme</button>
             <div id="HandleInput">
               <img src={lupa} alt="imagem de uma lupa"/>
-              <input type="text" placeholder="Pesquisar"/>
+              <Link className="searchInput" to="/Todos"><input  type="text" placeholder="Pesquisar"/></Link>
+              
+              {/* fazer um link no input para a rota todos */}
             </div>
             <div id="HandleOption">
               <img src={userImg} alt=""/>
@@ -250,7 +344,7 @@ export default class App extends React.Component {
         </Header>
 
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/mod2VNMDesafioFinal" element={<Home />} />
           <Route path="/todos" element={<Todos />} />
           <Route path="/favoritos" element={<Favoritos />} />
           <Route path="/javistos" element={<JaVistos />} />
