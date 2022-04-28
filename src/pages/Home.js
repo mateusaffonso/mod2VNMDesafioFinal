@@ -19,7 +19,6 @@ import rocketmanImg from "../image/BannerFilmes/rocketmanImg.png"
 
 const Main = styled.div`
 width: 100%;
-border: solid white;
 display:flex;
 flex-direction: column;
 
@@ -34,10 +33,10 @@ padding: 2.5px;
 display: flex;
 align-items:center;
 justify-content: start;
-border: solid white 1px;
 
-container {
-  border: white 1px solid;
+
+.containerAbout {
+  
   width: 50%;
   margin-left: 2rem;
   height: 14rem;
@@ -57,6 +56,7 @@ margin-left: 3rem;
 
 .middleContainer {
     width: 259px;
+    height: 25px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -106,6 +106,7 @@ div {
     
     .bannerFilm {
         width:100%;
+        border-radius: 5%;
         
         
     }
@@ -118,16 +119,25 @@ div {
         background-color: none;
         left: 87%;
         bottom:100%;
-        
-        
+        border-radius: inherit;
 
-        img {
+        button {
+            position: relative;
+            width: fit-content;
+            height: fit-content;
+
+            img {
             opacity: 1;
-            position: absolute;
+            position: relative;
             
             
 
         }
+        }
+        
+        
+
+        
 
     }
     
@@ -207,7 +217,7 @@ export default class App extends React.Component {
                         <figure>
                         <img src={capitaoFantasticoImg} alt="Banner do filme Capitão Fantástico"/>
                         </figure>
-                        <container>
+                        <container className="containerAbout">
                         <img src={favoriteHeart} alt="Heart icon"/>
                         <p><b>Visto recentemente</b></p>
                         <h2>Capitão Fantástico</h2>
@@ -224,7 +234,8 @@ export default class App extends React.Component {
                             wrapAround={true}
                             slidesToShow={5}
                             autoplay={true}
-                            autoplayInterval={1800}
+                            autoplayInterval={2500}
+                            adaptiveHeight={true}
                             nextButtonClassName={`
                             color:red;
                             `}
@@ -254,7 +265,10 @@ export default class App extends React.Component {
                                         <img className="bannerFilm" src={item.image} alt={`Banner do filme ${item.title}`}/>
                                         {/* Criar um div no favorite e verificar a largura e altura da divs antes de dar o position */}
                                         <div className="favoriteHeart">
-                                            <img  src={favoriteHeart} alt="icone de like"/>
+                                            <button>
+                                                <img  src={favoriteHeart} alt="icone de like"/>
+                                            </button>
+                                            
                                         </div>
                                         
                                     </div>

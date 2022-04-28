@@ -5,7 +5,7 @@ import favoriteHeart from "../image/icon/iconfavorite.svg"
 import likeGreen from "../image/icon/iconLike.svg"
 import lupa from "../image/lupaimg.png"
 
-import capitaoFantasticoImg from "../image/capitaoFantastico.png"
+
 import shrekImg from "../image/BannerFilmes/shrekimg.jpg"
 import sonhoDeLiberdadeimg from "../image/BannerFilmes/sonhoDeLiberdadeimg.png"
 import spiderManimg from "../image/BannerFilmes/spiderManimg.png"
@@ -14,6 +14,157 @@ import hojeQueroVoltarSozinhoimg from "../image/BannerFilmes/hojeQueroVoltarSozi
 import amaEloImg from "../image/BannerFilmes/amarEloImg.png"
 import fugaImg from "../image/BannerFilmes/fugaImg.png"
 import rocketmanImg from "../image/BannerFilmes/rocketmanImg.png"
+
+
+const ConteinarAllRoute = styled.div`
+h2 {
+    font-size: 29px;
+    margin-left: 3rem;
+    margin-top: 2rem;
+    
+}
+
+#HandleInput{
+
+    position: absolute;
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #2C2C2C;
+    width: 25.1%;
+    height: 32.5px;
+    border-radius: 4px;
+    left:56rem;
+    bottom: 37.5rem;
+  
+  
+    img {
+    background-color: #2C2C2C;
+    margin-left: 2px;
+    margin-right: 6px;
+    }
+}
+
+#HandleInput input {
+  width: 100%;
+  background-color:#2C2C2C;
+  color: #FFFFFF;
+  border-radius: 4px;
+  height: 30px;
+  font-size: 15px;
+  padding-left: 5px;
+
+  ::placeholder {
+    color:#FFFFFF;
+  }
+
+  :focus{
+    box-shadow: 0 0 0 0;
+    outline: 0;
+  } 
+  
+}
+`
+
+const ContainerAllFilmes = styled.div`
+border: #fff solid;
+width: 69rem;
+/* height: 40rem; */
+display: flex;
+flex-wrap: wrap;
+margin-top: 0.5rem;
+margin-left: 3rem;
+
+.middleContainer {
+    width: 259px;
+    height: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-right: 5px;
+    border: #fff 2px solid;
+
+    .scoreContainer{
+        width: 15%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+}
+
+
+
+h3 {
+    font-size: 16px;
+    max-width: 20.5ch;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+p {
+    font-size:12px;
+}
+`
+
+const ContainerItemFilme = styled.div`
+width: 259px;
+height: 242px;
+margin: 6px;
+margin-bottom: 2.5rem;
+display: flex;
+flex-direction: column;
+justify-content: space-evenly;
+
+
+
+
+div {
+    width: 259px;
+    height: 60%;
+
+    
+    .bannerFilm {
+        width:100%;
+        
+        
+    }
+
+    .favoriteHeart {
+        /* border: white solid; */
+        width: fit-content;
+        height: fit-content;
+        position: relative;
+        background-color: none;
+        left: 87%;
+        bottom:100%;
+        border-radius: inherit;
+
+        button {
+            position: relative;
+            width: fit-content;
+            height: fit-content;
+
+            img {
+            opacity: 1;
+            position: relative;
+            
+            
+
+        }
+        }
+        
+        
+
+        
+
+    }
+    
+
+
+    
+}
+`
 
 export default class Todos extends React.Component {
     state = {
@@ -87,7 +238,7 @@ export default class Todos extends React.Component {
         let { movies} = this.state;
 
         const filtreds = movies.filter((item) => {
-            if(item.title.toUpperCase().includes(e.targt.value.toUpperCase())) {
+            if(item.title.toUpperCase().includes(e.target.value.toUpperCase())) {
                 return !0;
             }
         });
@@ -99,23 +250,27 @@ export default class Todos extends React.Component {
 
     render() {
         return(
-            <div>
-                <div id="HandleInput">
-                <img src={lupa} alt="imagem de uma lupa"/>
-                <input onChange={this.filtred} type="text" placeholder="Pesquisar"/>
+            <ConteinarAllRoute>
                 
-                {/* fazer um link no input para a rota todos */}
+                <div id="HandleInput">
+                    <img src={lupa} alt="imagem de uma lupa"/>
+                    <input onChange={this.filtred} type="text" placeholder="Pesquisar"/>
                 </div>
-                <h2>Todos</h2>
-                {/* <ContainerDestaques>
-                        <Carousel>
-                            {this.state.movies.map((item) => (
-                                <ItemCarousel>
+                    <h2>Todos</h2>
+                    <ContainerAllFilmes>
+                        
+                        
+                            {this.state.moviesFiltred.map((item) => (
+                                <ContainerItemFilme>
                                     
                                     <div>
                                         <img className="bannerFilm" src={item.image} alt={`Banner do filme ${item.title}`}/>
+                                        {/* Criar um div no favorite e verificar a largura e altura da divs antes de dar o position */}
                                         <div className="favoriteHeart">
-                                            <img  src={favoriteHeart} alt="icone de like"/>
+                                            <button>
+                                                <img  src={favoriteHeart} alt="icone de like"/>
+                                            </button>
+                                            
                                         </div>
                                         
                                     </div>
@@ -129,27 +284,15 @@ export default class Todos extends React.Component {
                                         
                                     </div>
                                     <p>{item.description}</p>
-                                </ItemCarousel>
+                                </ContainerItemFilme>
                             ))}
-                        </Carousel>
-                    </ContainerDestaques> */}
-                {/* {this.state.moviesFiltred.map((item) => (
-                <ContainerFilm>
-                    <figure>
-                    <img
-                        src={item.poster_path}
-                        alt={`Banner do filme: ${item.title}`}
-                    />
-                    </figure>
-                    <ul key={item.id}>
-                    <li>
-                        <b>{item.title}</b>
-                    </li>
-                    <li>{item.overview}</li>
-                    </ul>
-                </ContainerFilm>
-                ))} */}
-            </div>
+                        
+                    </ContainerAllFilmes>
+            </ConteinarAllRoute>
+                
+                
+
+        
         )
     }
 }

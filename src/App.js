@@ -12,7 +12,6 @@ import JaVistos from "./pages/JaVistos"
 import Todos from "./pages/Todos"
 
 
-import logoTodo from "./image/logo.png"
 import userOptions from "./image/useroptions.png"
 import lupa from "./image/lupaimg.png"
 import userImg from "./image/userimg.png"
@@ -40,7 +39,7 @@ align-items: center;
 height: 80px;
 width: 100%;
 padding:2.5px;
-border: white 1px solid;
+
 
 `
 const LeftContent = styled.div`
@@ -51,7 +50,7 @@ align-items: center;
 color:#FFFFFF;
 margin-left:3rem;
 padding:3px;
-border: white 1px solid;
+
 
 h1 {
   width: 103px;
@@ -82,7 +81,7 @@ nav ul {
   }
 
   .dropDownMenu{
-    border: white solid;
+    
     width: 6.5rem;
     position: relative;
 
@@ -94,7 +93,6 @@ nav ul {
   .ContainerMenu{
     position: absolute;
     width: 6.8rem;
-    border: white solid;
     display: none;
     flex-direction: column;
     justify-content: flex-start;
@@ -140,7 +138,6 @@ justify-content: space-evenly;
 align-items: center;
 margin-right:15px;
 padding:3px;
-/* border: white 1px solid; */
 
 button {
   background-color: #E71B27;
@@ -148,6 +145,11 @@ button {
   border-radius: 5px;
   height:2.4rem;
   width: 8rem;
+
+  :hover {
+    border: white 20px;
+    opacity: 0.80;
+  }
 }
 
 #HandleInput{
@@ -210,37 +212,8 @@ button {
 }
 `
 
-const Main = styled.div`
-width: 100%;
-border: solid white;
-display:flex;
-align-items: center;
-`
 
-const ContainerRecentlySeen = styled.div`
-width: 77%;
-margin-top: 6rem;
-margin-left:3rem;
-padding: 2.5px;
-display: flex;
-align-items:center;
-justify-content: start;
-border: solid white 1px;
 
-container {
-  border: white 1px solid;
-  width: 50%;
-  margin-left: 2rem;
-  height: 14rem;
-  display: flex;
-  flex-direction:column;
-  justify-content: space-evenly;
-
-  img{
-    width: 21px;
-  }
-}
-`
 
 
 export default class App extends React.Component {
@@ -328,7 +301,7 @@ export default class App extends React.Component {
             
           </LeftContent>
           <RightContent>
-            <button background-color="white">Adicionar filme</button>
+            <button >Adicionar filme</button>
             <div id="HandleInput">
               <img src={lupa} alt="imagem de uma lupa"/>
               <Link className="searchInput" to="/Todos"><input  type="text" placeholder="Pesquisar"/></Link>
